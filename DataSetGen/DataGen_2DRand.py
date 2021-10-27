@@ -55,7 +55,8 @@ def main():
         "labels": [],
         "arr": [],
     }
-    for i in range(100):  # Make 100 entries
+    n = 1000
+    for i in range(n):  # Make n entries
         hits = np.zeros([32, 32])
         b = rand.uniform(0, 32)
         angle = rand.uniform(0, 2 * np.pi)
