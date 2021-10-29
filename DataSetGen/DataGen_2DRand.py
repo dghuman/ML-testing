@@ -5,6 +5,7 @@ import random as rand
 import numpy as np
 import pickle
 
+
 def save_pickle(obj, filename):
     with open(filename, "wb") as output:  # Overwrites
         pickle.dump(obj, output, -1)
@@ -55,7 +56,7 @@ def main():
         "labels": [],
         "arr": [],
     }
-    n = 1000
+    n = 10000
     for i in range(n):  # Make n entries
         hits = np.zeros([32, 32])
         b = rand.uniform(0, 32)
