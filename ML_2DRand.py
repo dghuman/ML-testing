@@ -12,6 +12,11 @@ from tools.timer import Timer  # load in Timer class
 
 timer = Timer()
 
+"""
+Arg parser should be used here
+"""
+
+
 """ 
 First load in the data that will be used to train. Dictionary is loaded into data. Calls are 'arr' and 'labels'. The loaded data is then converted into tensors so that they can be zipped into a tensorflow data set that is parsable by the workflow.
 """
@@ -58,7 +63,7 @@ optimizer = tf.keras.optimizers.RMSprop()
 model.compile(optimizer=optimizer, loss=loss_object, metrics=["accuracy"])
 
 timer.start()
-History = model.fit(dataset, epochs=10000, verbose=1)
+History = model.fit(dataset, epochs=1000, verbose=1)
 timer.stop()
 
 history = {}

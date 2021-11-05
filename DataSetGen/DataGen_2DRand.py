@@ -63,6 +63,8 @@ def main():
         angle = rand.uniform(0, 2 * np.pi)
         track, m = make_track(angle, b)
         hit_array(hits, track)
+        if np.count_nonzero(hits) < 3: # If less than 3 hits, skip it
+            continue 
         data_set["labels"].append(
             np.array(([b, m]))
         )  # Appended as intercept then slope
