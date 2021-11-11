@@ -63,7 +63,7 @@ optimizer = tf.keras.optimizers.RMSprop()
 model.compile(optimizer=optimizer, loss=loss_object, metrics=["accuracy"])
 
 timer.start()
-History = model.fit(dataset, epochs=1000, verbose=1)
+History = model.fit(dataset, epochs=20000, verbose=1)
 timer.stop()
 
 history = {}
