@@ -9,12 +9,13 @@ from tensorflow.keras import layers
 
 from DataSetGen.DataGen_2DRand import load_pickle, save_pickle
 from tools.timer import Timer  # load in Timer class
+from optparse import OptionParser
 
 usage = "usage: %prog [options] inputfile"
 parser = OptionParser(usage)
 timer = Timer()
 parser.add_option(
-    "-din",
+    "-d",
     "--datain",
     type="string",
     default="/home/dilraj/Documents/ML-testing/DataSetGen/2D_data/data_1.pkl",
@@ -22,7 +23,7 @@ parser.add_option(
     help="Training data input file in pickle format (.pkl).",
 )
 parser.add_option(
-    "-tdin",
+    "-f",
     "--testdata",
     type="string",
     default="/home/dilraj/Documents/ML-testing/DataSetGen/2D_data/data_2.pkl",
@@ -32,13 +33,13 @@ parser.add_option(
 parser.add_option(
     "-l",
     "--learn",
-    type="bool",
+    action="store_true",
     default=False,
     dest="LEARN",
     help="Boolian to determine if this is training that is continuing rather than starting anew.",
 )
 parser.add_option(
-    "-mf",
+    "-m",
     "--modelfile",
     type="string",
     default="/home/dilraj/Documents/ML-testing/fit_models/model_test.tf",
@@ -48,18 +49,26 @@ parser.add_option(
 parser.add_option(
     "-t",
     "--timer",
-    type="bool",
-    default=True,
-    dest="TIME",
+    action="store_true",
+    default=False,
+    dest="TIMER",
     help="Timer option. Set to True by default and times how long current training has been running.",
 )
 parser.add_option(
-    "-h",
+    "-i",
     "--history",
     type="string",
     default="/home/dilraj/Documents/ML-testing/fit_models/model_test_history.pkl",
     dest="HISTORY",
     help="History file containing information about the training stats saved in pickled format (.pkl).",
+)
+parser.add_option(
+    "-e",
+    "--epochs",
+    type="int",
+    default=1000,
+    dest="EPOCHS",
+    help="Integer number of epochs for the training."
 )
 (options, args) = parser.parse_args()
 
@@ -102,15 +111,14 @@ else:
             tf.keras.layers.Dense(2),
         ]
     )
-
-loss_object = tf.keras.losses.MeanSquaredError()
-optimizer = tf.keras.optimizers.RMSprop()
-
-model.compile(optimizer=optimizer, loss=loss_object, metrics=["accuracy"])
+    loss_object = tf.keras.losses.MeanSquaredError()
+    optimizer = tf.keras.optimizers.RMSprop()
+    
+    model.compile(optimizer=optimizer, loss=loss_object, metrics=["mean_absolute_error"])
 
 if options.TIMER:
     timer.start()
-History = model.fit(dataset, epochs=20000, verbose=1)
+History = model.fit(dataset, epochs=options.EPOCHS, verbose=1)
 if options.TIMER:
     timer.stop()
 

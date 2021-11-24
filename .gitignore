@@ -133,3 +133,6 @@ dmypy.json
 
 # Pickle data
 *.pkl
+
+# Model data
+fit_models/
