@@ -4,9 +4,6 @@ Personal Repo for Learning and testing ML programs. In particular tensorflow and
 ## DataSetGen
 Contains the script DataGen_2DRand.py which is the script for generating the training and test data sets. The generated data is in the form of 2D numpy arrays.
 
-## fit_models
-Contains model files after training to be called again.
-
 ## tools
 Useful python functions. Currently just a timer is here.
 
